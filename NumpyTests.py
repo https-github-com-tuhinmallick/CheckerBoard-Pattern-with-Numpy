@@ -195,7 +195,7 @@ class TestGen(unittest.TestCase):
 
     def testShuffleEpoch(self):
         # Checks for shuffling of complete data set, not only inside batch after one epoch
-        # Detects if the same images (or rather ixel values) are included in the same batch
+        # Detects if the same images (or rather pixel values) are included in the same batch
         from generator import ImageGenerator
         gen = ImageGenerator(self.file_path, self.label_path, 50, [32, 32, 3], rotation=False, mirroring=False,
                              shuffle=True)
