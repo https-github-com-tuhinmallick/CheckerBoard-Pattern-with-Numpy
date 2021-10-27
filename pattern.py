@@ -14,14 +14,14 @@ class Checker(object):
         # In order to avoid truncated checkerboard patterns, we make sure resolution is evenly dividable  by 2· tile size.
         if (self.resolution % (2 * self.tile_size) == 0):
             # self.output = np.tile(np.array([[0, 1], [1, 0]]), (self.size, self.size))
-            re = np.zeros([self.tile_size, self.tile_size])
+            re = np.zeros([self.tile_size, self.tile_size])    
             ro = np.ones([self.tile_size, self.tile_size])
             opo = np.concatenate((re, ro), axis=1)
             opi = np.concatenate((ro, re), axis=1)
             op = np.concatenate((opo, opi), axis=0)
-            fact = self.resolution / (2 * self.tile_size)
-            fact = int(fact)
-            self.output = np.tile(op, (fact, fact))
+            factor = self.resolution / (2 * self.tile_size)
+            factor= int(fact)
+            self.output = np.tile(op, (factor, factor))
             fin = np.copy(self.output)
         else:
             assert "Truncation Error"
