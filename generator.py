@@ -1,23 +1,17 @@
 import os.path
 import json
-import glob2
-import scipy.misc
 import numpy as np
-import math
 import skimage.transform
-from skimage.transform import resize
-from random import randint
 import matplotlib.pyplot as plt
 
 
-
-
-
-
-# In this exercise task you will implement an image generator. Generator objects in python are defined as having a next function.
-# This next function returns the next generated object. In our case it returns the input of a neural network each time it gets called.
+# In this exercise task you will implement an image generator.
+# Generator objects in python are defined as having a next function.
+# This next function returns the next generated object.
+# In our case it returns the input of a neural network each time it gets called.
 # This input consists of a batch of images and its corresponding labels.
 class ImageGenerator:
+
     def __init__(self, file_path, label_path, batch_size, image_size, rotation=False, mirroring=False, shuffle=False):
         # Define all members of your generator class object as global members here.
         # These need to include:
@@ -49,7 +43,8 @@ class ImageGenerator:
             self.data_files.sort()
 
         self.idx = 0
-
+        self.epoch_counter = 0
+        self.shuffle_epoch = 0
 
     def next(self):
         # This function creates a batch of images and corresponding labels and returns them.
@@ -62,9 +57,12 @@ class ImageGenerator:
 
         batch_files = self.data_files[self.idx: self.idx + self.batch_size]
         # If the last batch is smaller than batch size, then reuse initial images.
+        if self.shuffle:
+            np.random.shuffle(self.data_files)
         if len(batch_files) < self.batch_size:
             self.idx = self.batch_size - len(batch_files)
             batch_files.extend(self.data_files[:self.idx])
+            self.epoch_counter += 1
         else:
             self.idx = self.idx + self.batch_size
 
@@ -80,7 +78,6 @@ class ImageGenerator:
             labels.append(lbl)
 
         return np.array(images), np.array(labels)
-
 
     def augment(self, img):
         # this function takes a single image as an input and performs a random transformation
@@ -99,17 +96,17 @@ class ImageGenerator:
 
     def current_epoch(self):
         # return the current epoch number
-        return self.
+        return self.epoch_counter
 
     def class_name(self, x):
         # This function returns the class name for a specific input
-        #TODO: implement class name function
+        # TODO: implement class name function
         return self.class_dict[x]
 
     def show(self):
         # In order to verify that the generator creates batches as required, this functions calls next to get a
         # batch of images and labels and visualizes it.
-        #TODO: implement show method
+        # TODO: implement show method
         images, labels = self.next()
 
         # TODO: Decide number of rows and columns
@@ -123,5 +120,6 @@ class ImageGenerator:
             sp.title.set_text(self.class_name(lbl))
 
         plt.show()
-
-
+© 2021 GitHub, Inc.
+Terms
+Privacy
