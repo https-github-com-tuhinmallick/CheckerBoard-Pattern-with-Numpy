@@ -20,7 +20,7 @@ class Checker(object):
             opi = np.concatenate((ro, re), axis=1)
             op = np.concatenate((opo, opi), axis=0)
             factor = self.resolution / (2 * self.tile_size)
-            factor= int(fact)
+            factor= int(factor)
             self.output = np.tile(op, (factor, factor))
             fin = np.copy(self.output)
         else:
