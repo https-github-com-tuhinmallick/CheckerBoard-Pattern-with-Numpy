@@ -23,8 +23,6 @@ class Checker(object):
             fact = int(fact)
             self.output = np.tile(op, (fact, fact))
             fin = np.copy(self.output)
-
-
         else:
             assert "Truncation Error"
 
