@@ -11,6 +11,7 @@ class Checker(object):
 
 #To create the checkerboard pattern as a numpy array
     def draw(self):
+        # In order to avoid truncated checkerboard patterns, we make sure resolution is evenly dividable  by 2· tile size.
         if (self.resolution % (2 * self.tile_size) == 0):
             # self.output = np.tile(np.array([[0, 1], [1, 0]]), (self.size, self.size))
             re = np.zeros([self.tile_size, self.tile_size])
@@ -77,7 +78,6 @@ class Spectrum(object):
     def show(self):
         plt.imshow(self.output)     #to display a grayscale image,cmap=gray is used
         plt.show()
-
 
 
 
