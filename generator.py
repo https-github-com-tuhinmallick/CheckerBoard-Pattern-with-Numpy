@@ -52,17 +52,18 @@ class ImageGenerator:
         # Note that your amount of total data might not be divisible without remainder with the batch_size.
         # Think about how to handle such cases
         # TODO: implement next method
-        images = []
-        labels = []
+        images = []      #initializes an empty list of images
+        labels = []      #initializes an empty list of labels
 
         batch_files = self.data_files[self.idx: self.idx + self.batch_size]
-        # If the last batch is smaller than batch size, then reuse initial images.
+        #if shuffle = true, then it will shuffle the Dataset
         if self.shuffle:
-            np.random.shuffle(self.data_files)
+            np.random.shuffle(self.data_files)     #function to shuffle the Dataset 
+        # If the last batch is smaller than batch size, then reuse initial images. 
         if len(batch_files) < self.batch_size:
             self.idx = self.batch_size - len(batch_files)
             batch_files.extend(self.data_files[:self.idx])
-            self.epoch_counter += 1
+            self.epoch_counter += 1       #counter to estimate the current epoch
         else:
             self.idx = self.idx + self.batch_size
 
