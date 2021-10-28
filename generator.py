@@ -44,7 +44,7 @@ class ImageGenerator:
 
         self.idx = 0
         self.epoch_counter = 0
-        self.shuffle_epoch = 0
+     
 
     def next(self):
         # This function creates a batch of images and corresponding labels and returns them.
